@@ -11,7 +11,7 @@ cabal-version:      3.0
 --   http://haskell.org/cabal/users-guide/
 --
 -- The name of the package.
-name:               aoc-2023
+name:               aoc2023
 
 -- The package version.
 -- See the Haskell package versioning policy (PVP) for standards
@@ -70,10 +70,15 @@ executable aoc-2023
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
-    build-depends:    base ^>=4.17.2.0
+    build-depends:
+        base ^>=4.17.2.0
+        , regex-posix ^>=0.96.0.1
 
     -- Directories containing source files.
     hs-source-dirs:   app
 
     -- Base language which the package is written in.
     default-language: GHC2021
+
+    other-modules:
+        DayOne
