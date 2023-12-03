@@ -73,6 +73,7 @@ executable aoc-2023
     build-depends:
         base ^>=4.17.2.0
         , regex-posix ^>=0.96.0.1
+        , containers ^>=0.6.7
 
     -- Directories containing source files.
     hs-source-dirs:   app
@@ -82,3 +83,4 @@ executable aoc-2023
 
     other-modules:
         DayOne
+        , DayTwo

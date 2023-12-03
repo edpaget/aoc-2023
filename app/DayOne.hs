@@ -1,9 +1,9 @@
 module DayOne where
 
-import Text.Regex.Posix
+import Data.Char (isDigit)
 import Text.Printf (printf)
 import Text.Read (readMaybe)
-import Data.Char (isDigit)
+import Text.Regex.Posix
 
 dayOne :: IO ()
 dayOne = do
@@ -18,8 +18,8 @@ dayOne = do
 -- Part A
 firstDigit :: String -> Maybe Char
 firstDigit "" = Nothing
-firstDigit (c:_) | isDigit c = Just c
-firstDigit (_:str) = firstDigit str
+firstDigit (c : _) | isDigit c = Just c
+firstDigit (_ : str) = firstDigit str
 
 -- Part B
 digitRegex :: String
@@ -31,13 +31,11 @@ firstDigitOrNumberWord str = do
   digits <- digitOrNumberWord str
   Just (head digits)
 
-
 lastDigitOrNumberWord :: String -> Maybe Char
 lastDigitOrNumberWord "" = Nothing
 lastDigitOrNumberWord str = do
   digits <- digitOrNumberWord str
   Just (last digits)
-
 
 digitOrNumberWord :: String -> Maybe [Char]
 digitOrNumberWord str = mapM toChar (getAllTextMatches $ str =~ (printf "(%s|[0-9])" digitRegex :: String) :: [String])
@@ -52,14 +50,14 @@ toChar "six" = Just '6'
 toChar "seven" = Just '7'
 toChar "eight" = Just '8'
 toChar "nine" = Just '9'
-toChar (c:_) | isDigit c = Just c
+toChar (c : _) | isDigit c = Just c
 toChar _ = Nothing
 
 charsToInt :: Char -> Char -> Maybe Int
 charsToInt a b = readMaybe (a : b : [])
 
 applyDayOne :: (String -> Maybe Char) -> (String -> Maybe Char) -> [String] -> Maybe Int
-applyDayOne getFirstDigit getLastDigit inputLines =  do
+applyDayOne getFirstDigit getLastDigit inputLines = do
   firstDigits <- mapM getFirstDigit inputLines
   lastDigits <- mapM getLastDigit inputLines
   coordinateInts <- mapM (uncurry $ charsToInt) (zip firstDigits lastDigits)
