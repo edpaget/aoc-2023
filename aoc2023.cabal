@@ -84,3 +84,5 @@ executable aoc-2023
     other-modules:
         DayOne
         , DayTwo
+        , DayThree
+        , Parser
