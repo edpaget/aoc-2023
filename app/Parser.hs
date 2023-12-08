@@ -82,13 +82,24 @@ digit :: Parser Char
 digit = satisfy isDigit
 
 whitespace :: Parser [Char]
-whitespace = (:) <$> satisfy isSpace <*> whitespace <|> pure []
+whitespace = Parser.repeat (satisfy isSpace)
 
 digits :: Parser [Char]
-digits = (:) <$> digit <*> digits <|> pure []
+digits = Parser.repeat digit
+
+repeat :: Parser a -> Parser [a]
+repeat p = (:) <$> p <*> Parser.repeat p <|> pure []
+
+moreThanOnce :: Parser [a] -> Parser [a]
+moreThanOnce p = Parser $ \input ->
+  case parse p input of
+    Left err -> Left err
+    Right (output, next) -> case output of
+        [] -> Left [Empty]
+        rst -> Right (rst, next)
 
 integer :: Parser Int
-integer = read <$> digits
+integer = read <$> moreThanOnce digits
 
 eof :: Parser ()
 eof = Parser $ \input ->

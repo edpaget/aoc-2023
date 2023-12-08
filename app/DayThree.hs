@@ -55,7 +55,7 @@ adjacentToSymbol set ds (rrow, ccol) = not (Set.null (set `Set.intersection` adj
 partA :: String -> Either [Error] Int
 partA input = do
   (partInfo, _) <- parse parts (input, 0, 0)
-  let symbols = Set.fromList [p| (Symbol _ p) <- partInfo]
+  let symbols = Set.fromList [p | (Symbol _ p) <- partInfo]
   let partNos = [num | (PartNumber num pos) <- partInfo, adjacentToSymbol symbols num pos]
   Right (sum (map read partNos))
 
