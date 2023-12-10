@@ -20,9 +20,6 @@ data Card = Card Int [Int] [Int] deriving (Show, Eq)
 cardId :: Parser Int
 cardId = string "Card" *> whitespace *> integer <* char ':'
 
-integers :: Parser [Int]
-integers = Parser.repeat (whitespace *> integer)
-
 card :: Parser Card
 card = do
   cid <- cardId

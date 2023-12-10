@@ -58,7 +58,7 @@ game = do
 
 
 linesToInput :: [String] -> [Input]
-linesToInput ls = zip3 ls [0..length ls] (repeat 0)
+linesToInput ls = zip3 ls [0..length ls] (Prelude.repeat 0)
 
 -- Part A
 

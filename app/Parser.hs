@@ -101,6 +101,9 @@ moreThanOnce p = Parser $ \input ->
 integer :: Parser Int
 integer = read <$> moreThanOnce digits
 
+integers :: Parser [Int]
+integers = Parser.repeat (whitespace *> integer)
+
 eof :: Parser ()
 eof = Parser $ \input ->
   case input of
