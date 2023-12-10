@@ -88,4 +88,5 @@ executable aoc-2023
         , DayFour
         , DayFive
         , DaySix
+        , DaySeven
         , Parser
