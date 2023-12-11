@@ -79,7 +79,7 @@ string :: [Char] -> Parser [Char]
 string = traverse char
 
 digit :: Parser Char
-digit = satisfy isDigit
+digit = satisfy isDigit <|> char '-'
 
 whitespace :: Parser [Char]
 whitespace = Parser.repeat (satisfy isSpace)
